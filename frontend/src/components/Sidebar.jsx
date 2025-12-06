@@ -10,6 +10,7 @@ import {
   LogOut,
   Activity,
   Settings,
+  Briefcase,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -17,6 +18,7 @@ const navItems = [
   { label: "Overview", icon: LayoutDashboard, path: "/dashboard" },
   { label: "Branches", icon: Store, path: "/dashboard/branches" },
   { label: "Inventory", icon: Package, path: "/dashboard/inventory" },
+  { label: "Employees", icon: Briefcase, path: "/dashboard/employees" },
   { label: "Users", icon: Users, path: "/dashboard/users" },
   { label: "Settings", icon: Settings, path: "/dashboard/settings" },
 ];

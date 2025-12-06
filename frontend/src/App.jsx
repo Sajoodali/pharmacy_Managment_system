@@ -13,6 +13,7 @@ import Inventory from "./pages/Inventory";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";
 import LandingPage from "./pages/LandingPage";
+import Employees from "./pages/Employees";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route index element={<DashboardHome />} />
           <Route path="branches" element={<Branches />} />
           <Route path="inventory" element={<Inventory />} />
+          <Route path="employees" element={<Employees />} />
           <Route path="users" element={<Users />} />
           <Route path="settings" element={<Settings />} />
         </Route>
