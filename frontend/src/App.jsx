@@ -17,6 +17,7 @@ import Employees from "./pages/Employees";
 import { CartProvider } from "./context/CartContext";
 import ShopPage from "./pages/ShopPage";
 import WebProducts from "./pages/WebProducts";
+import Orders from "./pages/Orders";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />}>
             <Route index element={<DashboardHome />} />
+            <Route path="orders" element={<Orders />} />
             <Route path="web-products" element={<WebProducts />} />
             <Route path="branches" element={<Branches />} />
             <Route path="inventory" element={<Inventory />} />

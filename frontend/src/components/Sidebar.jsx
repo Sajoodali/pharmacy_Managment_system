@@ -12,11 +12,13 @@ import {
   Settings,
   Briefcase,
   Globe,
+  ClipboardList,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const navItems = [
   { label: "Overview", icon: LayoutDashboard, path: "/dashboard" },
+  { label: "Orders", icon: ClipboardList, path: "/dashboard/orders" },
   { label: "Online Store", icon: Globe, path: "/dashboard/web-products" },
   { label: "Branches", icon: Store, path: "/dashboard/branches" },
   { label: "Inventory", icon: Package, path: "/dashboard/inventory" },
