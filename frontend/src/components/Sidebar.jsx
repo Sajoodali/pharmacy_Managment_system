@@ -11,11 +11,13 @@ import {
   Activity,
   Settings,
   Briefcase,
+  Globe,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 const navItems = [
   { label: "Overview", icon: LayoutDashboard, path: "/dashboard" },
+  { label: "Online Store", icon: Globe, path: "/dashboard/web-products" },
   { label: "Branches", icon: Store, path: "/dashboard/branches" },
   { label: "Inventory", icon: Package, path: "/dashboard/inventory" },
   { label: "Employees", icon: Briefcase, path: "/dashboard/employees" },

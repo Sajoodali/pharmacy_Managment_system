@@ -1,8 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ShoppingCart, Plus, Star } from "lucide-react";
+import { useCart } from "../../context/CartContext";
+import { Link } from "react-router-dom";
 
-const ProductSection = ({ onAddToCart }) => {
+const ProductSection = () => {
+  const { addToCart } = useCart();
+
   const products = [
     {
       id: 1,
@@ -89,7 +93,7 @@ const ProductSection = ({ onAddToCart }) => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <button
-                  onClick={() => onAddToCart(product)}
+                  onClick={() => addToCart(product)}
                   className="absolute bottom-3 right-3 bg-white p-2.5 rounded-full shadow-lg text-teal-600 hover:bg-teal-600 hover:text-white transition-all transform hover:scale-110 active:scale-95"
                 >
                   <Plus size={20} />
@@ -118,7 +122,7 @@ const ProductSection = ({ onAddToCart }) => {
                     Rs. {product.price}
                   </span>
                   <button
-                    onClick={() => onAddToCart(product)}
+                    onClick={() => addToCart(product)}
                     className="text-sm font-semibold text-gray-500 hover:text-teal-600 flex items-center gap-1 group/btn"
                   >
                     Add to Cart
@@ -134,9 +138,11 @@ const ProductSection = ({ onAddToCart }) => {
         </div>
 
         <div className="mt-12 text-center">
-          <button className="bg-white border-2 border-teal-100 ring-4 ring-teal-50 text-teal-600 hover:bg-teal-50 hover:border-teal-200 px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105">
-            View All Medicines
-          </button>
+          <Link to="/shop">
+            <button className="bg-white border-2 border-teal-100 ring-4 ring-teal-50 text-teal-600 hover:bg-teal-50 hover:border-teal-200 px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105">
+              View All Medicines
+            </button>
+          </Link>
         </div>
       </div>
     </section>

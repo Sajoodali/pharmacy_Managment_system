@@ -14,23 +14,30 @@ import Users from "./pages/Users";
 import Settings from "./pages/Settings";
 import LandingPage from "./pages/LandingPage";
 import Employees from "./pages/Employees";
+import { CartProvider } from "./context/CartContext";
+import ShopPage from "./pages/ShopPage";
+import WebProducts from "./pages/WebProducts";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />}>
-          <Route index element={<DashboardHome />} />
-          <Route path="branches" element={<Branches />} />
-          <Route path="inventory" element={<Inventory />} />
-          <Route path="employees" element={<Employees />} />
-          <Route path="users" element={<Users />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
-      </Routes>
-    </Router>
+    <CartProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route index element={<DashboardHome />} />
+            <Route path="web-products" element={<WebProducts />} />
+            <Route path="branches" element={<Branches />} />
+            <Route path="inventory" element={<Inventory />} />
+            <Route path="employees" element={<Employees />} />
+            <Route path="users" element={<Users />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+        </Routes>
+      </Router>
+    </CartProvider>
   );
 }
 

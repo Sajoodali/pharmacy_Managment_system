@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
-const Navbar = ({ cartCount, onOpenCart }) => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { cartItems, openCart } = useCart();
+  const cartCount = cartItems.length;
 
   return (
     <nav className="fixed w-full bg-white/90 backdrop-blur-md z-50 shadow-sm border-b border-teal-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
-          <div
+          <Link
+            to="/"
             className="flex-shrink-0 flex items-center gap-2 cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
@@ -21,22 +25,22 @@ const Navbar = ({ cartCount, onOpenCart }) => {
             <span className="text-2xl font-bold bg-gradient-to-r from-teal-700 to-teal-500 bg-clip-text text-transparent">
               PharmaCare
             </span>
-          </div>
+          </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-10">
-            <a
-              href="#"
+            <Link
+              to="/"
               className="font-medium text-gray-600 hover:text-teal-600 transition-colors"
             >
               Home
-            </a>
-            <a
-              href="#shop"
+            </Link>
+            <Link
+              to="/shop"
               className="font-medium text-gray-600 hover:text-teal-600 transition-colors"
             >
               Shop
-            </a>
+            </Link>
             <a
               href="#branches"
               className="font-medium text-gray-600 hover:text-teal-600 transition-colors"
@@ -51,7 +55,7 @@ const Navbar = ({ cartCount, onOpenCart }) => {
             </a>
 
             <button
-              onClick={onOpenCart}
+              onClick={openCart}
               className="relative p-2 text-gray-600 hover:text-teal-600 transition-colors"
             >
               <ShoppingCart size={24} />
@@ -72,7 +76,7 @@ const Navbar = ({ cartCount, onOpenCart }) => {
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center gap-4">
             <button
-              onClick={onOpenCart}
+              onClick={openCart}
               className="relative p-2 text-gray-600 hover:text-teal-600 transition-colors"
             >
               <ShoppingCart size={24} />
@@ -102,18 +106,18 @@ const Navbar = ({ cartCount, onOpenCart }) => {
             className="md:hidden bg-white border-b border-gray-100 shadow-lg overflow-hidden"
           >
             <div className="px-4 pt-2 pb-6 space-y-2">
-              <a
-                href="#"
+              <Link
+                to="/"
                 className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
               >
                 Home
-              </a>
-              <a
-                href="#shop"
+              </Link>
+              <Link
+                to="/shop"
                 className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
               >
                 Shop
-              </a>
+              </Link>
               <a
                 href="#branches"
                 className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
