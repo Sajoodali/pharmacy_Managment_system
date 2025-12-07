@@ -8,6 +8,8 @@ import ProductSection from "../components/landing/ProductSection";
 import CartDrawer from "../components/landing/CartDrawer";
 import { useCart } from "../context/CartContext";
 
+import AboutUs from "../components/landing/AboutUs";
+
 const LandingPage = () => {
   const { isCartOpen, closeCart, cartItems, removeFromCart } = useCart();
 
@@ -18,6 +20,8 @@ const LandingPage = () => {
       <Hero />
 
       <ProductSection />
+
+      <AboutUs />
 
       <Features />
 

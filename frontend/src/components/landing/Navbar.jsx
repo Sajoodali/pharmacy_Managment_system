@@ -42,6 +42,12 @@ const Navbar = () => {
               Shop
             </Link>
             <a
+              href="#about"
+              className="font-medium text-gray-600 hover:text-teal-600 transition-colors"
+            >
+              About Us
+            </a>
+            <a
               href="#branches"
               className="font-medium text-gray-600 hover:text-teal-600 transition-colors"
             >
@@ -118,6 +124,12 @@ const Navbar = () => {
               >
                 Shop
               </Link>
+              <a
+                href="#about"
+                className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
+              >
+                About Us
+              </a>
               <a
                 href="#branches"
                 className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50"
