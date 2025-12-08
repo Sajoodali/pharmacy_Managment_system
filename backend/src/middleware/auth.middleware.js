@@ -30,3 +30,18 @@ export const protectRoute = async (req, res, next) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+// ... protectRoute code ke baad ...
+
+// Ye check karega ke user ka Role kya hai (Permission Check)
+export const restrictTo = (...allowedRoles) => {
+  return (req, res, next) => {
+    // req.user humein protectRoute se mila tha
+    if (!allowedRoles.includes(req.user.role)) {
+      return res.status(403).json({ 
+        message: "You do not have permission to perform this action" 
+      });
+    }
+    next();
+  };
+};

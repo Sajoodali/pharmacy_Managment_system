@@ -55,3 +55,36 @@ export const checkAuth = (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+// --- TEMPORARY: SIRF PEHLA OWNER BANANE KE LIYE ---
+export const createInitialOwner = async (req, res) => {
+  try {
+    // 1. Check kro kahin pehle se Owner to nahi?
+    const existingOwner = await User.findOne({ role: "super_owner" });
+    
+    if (existingOwner) {
+      return res.status(400).json({ message: "Super Owner already exists! Please login." });
+    }
+
+    // 2. Naya Owner Create kro (Req.body se data lekar)
+    const newOwner = new User({
+      fullName: req.body.fullName,
+      email: req.body.email,
+      password: req.body.password,
+      role: "super_owner", // Hardcode kar diya taaki galti se koi aur role na ban jaye
+      branchId: null       // Owner kisi branch ka nahi hota
+    });
+
+    await newOwner.save();
+
+    res.status(201).json({
+      success: true,
+      message: "First Super Owner Created! Now go and Login.",
+      user: newOwner
+    });
+
+  } catch (error) {
+    console.log("Error in seed owner", error.message);
+    res.status(500).json({ message: error.message });
+  }
+};
