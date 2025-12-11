@@ -88,3 +88,44 @@ export const createInitialOwner = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// ... purane imports aur functions ...
+
+// --- UPDATE PASSWORD ---
+export const updatePassword = async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    // 1. Validation: Dono fields zaroori hain
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    // 2. Validation: Password length check (Optional but good)
+    if (newPassword.length < 6) {
+      return res.status(400).json({ message: "Password must be at least 6 characters" });
+    }
+
+    // 3. User ko wapis fetch kro Password field ke sath
+    // (Kyunki req.user me password nahi hota, aur model me select: false hai)
+    const user = await User.findById(req.user._id).select("+password");
+
+    // 4. Check kro purana password sahi hai ya nahi
+    const isMatch = await user.comparePassword(currentPassword);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Incorrect current password" });
+    }
+
+    // 5. Naya password set kro
+    user.password = newPassword;
+
+    // 6. Save kro (Model ka pre-save hook isay automatic encrypt kr dega)
+    await user.save();
+
+    res.status(200).json({ message: "Password updated successfully" });
+
+  } catch (error) {
+    console.log("Error in updatePassword", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
