@@ -63,3 +63,37 @@ export const deleteStaff = async (req, res) => {
     res.status(500).json({ message: "Error deleting staff" });
   }
 };
+
+export const createBranch = async (req, res) => {
+  try {
+    const { name, location } = req.body;
+
+    // Check if branch already exists
+    const existingBranch = await Branch.findOne({ name });
+    if (existingBranch) {
+      return res.status(400).json({ message: "Branch already exists" });
+    }
+
+    // New Branch Object
+    const newBranch = new Branch({
+      name,
+      location
+    });
+
+    await newBranch.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Branch created successfully",
+      data: {
+        id: newBranch._id,
+        name: newBranch.name,
+        location: newBranch.location
+      }
+    });
+
+  } catch (error) {
+    console.log("Error in createBranch controller", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
