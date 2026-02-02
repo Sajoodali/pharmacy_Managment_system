@@ -44,7 +44,7 @@ export const getAllStaff = async (req, res) => {
   try {
     // Sirf wo users lao jo 'super_owner' nahi hain (Owner khud ko list me kyu dekhe?)
     const staff = await User.find({ role: { $ne: "super_owner" } }).select("-password");
-    
+
     res.status(200).json(staff);
   } catch (error) {
     res.status(500).json({ message: "Error fetching staff" });
@@ -97,3 +97,34 @@ export const createBranch = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+export const updateBranch = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, location } = req.body;
+    const updatedBranch = await Branch.findByIdAndUpdate(
+      id,
+      { name, location },
+      { new: true }
+    );
+    res.status(200).json({
+      success: true,
+      message: "Branch updated successfully",
+      data: updatedBranch
+    });
+  } catch (error) {
+    console.log("Error in updateBranch controller", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+export const deleteBranch = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Branch.findByIdAndDelete(id);
+    res.status(200).json({ message: "Branch deleted successfully" });
+  } catch (error) {
+    console.log("Error in deleteBranch controller", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
